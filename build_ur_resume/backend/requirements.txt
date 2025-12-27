@@ -1,0 +1,39 @@
+fastapi
+uvicorn[standard]
+
+# Database
+motor              # Async MongoDB driver
+pymongo            # Sync mongo utils (used sometimes)
+
+# File Upload + Parsing
+python-multipart   # For handling file uploads (multipart/form-data)
+pymupdf            # PyMuPDF (fast PDF text extraction)
+
+# Background tasks
+redis              # Redis client
+rq                 # RQ job queue
+
+# Cloud Storage (S3 / MinIO)
+boto3
+botocore
+
+# Environment & Validation
+pydantic
+python-dotenv
+
+# NLP (minimal)
+spacy
+
+# Optional: if you use full spaCy model
+# en-core-web-sm (install separately)
+pydantic-settings
+passlib[bcrypt] 
+python-jose[cryptography] 
+authlib
+pydantic[email]
+httpx
+argon2-cffi
+pdfplumber
+python-docx
+python-magic
+itsdangerous

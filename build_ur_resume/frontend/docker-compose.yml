@@ -1,0 +1,17 @@
+# frontend/docker-compose.yml
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: resume_frontend
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    environment:
+      - VITE_BACKEND_URL=http://web:8000
+      - CHOKIDAR_USEPOLLING=true
+    
