@@ -9,9 +9,9 @@ export default {
     extend: {
       colors: {
         // Unified Palette
-        "primary": "#c0755d", // Updated Terracotta
+        "primary": "#c05a42", // Updated Terracotta (New)
         "primary-light": "#e8b4a7",
-        "primary-hover": "#a8634d",
+        "primary-hover": "#a44d38",
         "secondary": "#5a6c4f", // Earthy Green
         "accent-green": "#7f9e8a",
         "cream": "#fdfbf7",
@@ -47,7 +47,7 @@ export default {
       fontFamily: {
         "display": ["Nunito", "sans-serif"],
         "heading": ["Varela Round", "sans-serif"],
-        "body": ["Nunito Sans", "sans-serif"], // Updated to Nunito Sans
+        "body": ["DM Sans", "sans-serif"], // Updated to DM Sans
         "sans": ["Nunito Sans", "sans-serif"]
       },
       borderRadius: {
