@@ -8,44 +8,47 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Light Mode Palette (Boutique Aesthetic)
-        "primary": "#EAD2BF", // Soft Terracotta
-        "primary-hover": "#dcc0aa", // Slightly darker for hover
-        "secondary": "#A3B5A1", // Earthy Green
-        "accent-green": "#A3B5A1", // Mapping Secondary to accent-green
-        "soft-cream": "#FDF9F5", // Creamy White
-        "cream": "#FDF9F5",
-        "text-dark": "#4A4A4A", // Charcoal Grey
-        "text-light": "#8C8C8C", // Medium Grey
-        "border-soft": "#C79F7F", // Muted Gold/Bronze (Accent) for key borders
+        // Light Mode Palette (Original)
+        "primary": "#c0755d",
+        "primary-hover": "#a8634d",
+        "accent-green": "#7f9e8a",
+        "soft-cream": "#f9f7f2",
+        "dark-cream": "#edeadd",
+        "text-dark": "#44403c",
+        "text-light": "#78716c",
+        "border-soft": "#e6e1d6",
         "white": "#ffffff",
+        // Dark Mode Palette (Refined for User Request)
+        "dark-charcoal": "#1c1917", // Warm, deep charcoal (Stone-950)
+        "dark-card-bg": "#292524", // Slightly lighter warm charcoal (Stone-900)
+        "dark-input-bg": "#141211", // Very dark inset for inputs
+        "dark-border": "#44403c", // Warm grey border (Stone-700)
+        "dark-forest-green": "#0f2e28", // Deep earthy forest green
+        "dark-accent": "#d4856e", // Rich terracotta adjusted for dark mode contrast
+        "dark-accent-hover": "#b56d58",
+        "off-white": "#fafaf9", // Stone-50 for high legibility
+        "light-cream": "#e7e5e4", // Stone-200 for secondary text
+        "dark-text-medium": "#a8a29e", // Stone-400
+        "dark-text-darker": "#57534e", // Stone-600
 
-        // Dark Mode Palette (Boutique Aesthetic - Dark)
-        "dark-charcoal": "#2C2C2C", // Deep Grey (Background)
-        "dark-card-bg": "#363636", // Slightly lighter than bg
-        "dark-input-bg": "#242424", // Slightly darker than bg
-        "dark-border": "#4F6B4F", // Deep Forest Green or Bronze? Using Secondary Dark for contrast
-        "dark-forest-green": "#4F6B4F", // Deep Forest Green
-        "dark-accent": "#8B4513", // Saddle Brown (Primary Dark) - used for main buttons
-        "dark-accent-hover": "#9e531e",
-        "off-white": "#FDF9F5", // Creamy White (High Contrast Text)
-        "light-cream": "#BEBEBE", // Light Grey (Muted Text)
-        "dark-text-medium": "#BEBEBE",
-        "dark-text-darker": "#8C8C8C",
-        "dark-gold": "#B8860B", // Dark Goldenrod (True Accent)
+        // Brand aliases for compatibility if needed (optional, but good for safety)
+        "sand": "#f9f7f2", // Mapping new soft-cream to old sand name if used elsewhere
+        "surface-light": "#ffffff",
+        "background-dark": "#1c1917",
+        "surface-dark": "#292524",
       },
       fontFamily: {
-        "display": ["Nunito", "sans-serif"],
         "heading": ["Varela Round", "sans-serif"],
-        "body": ["Nunito Sans", "sans-serif"], // Updated to Nunito Sans
-        "sans": ["Nunito Sans", "sans-serif"]
+        "body": ["Nunito Sans", "sans-serif"],
+        "sans": ["Nunito Sans", "sans-serif"],
+        "display": ["Varela Round", "sans-serif"], // Mapping display to heading font
       },
       borderRadius: {
-        "DEFAULT": "0.375rem",
-        "lg": "0.75rem",
-        "xl": "1rem",
-        "2xl": "1.5rem",
-        "3xl": "2rem",
+        "DEFAULT": "1rem",
+        "lg": "1.25rem",
+        "xl": "1.5rem",
+        "2xl": "2rem",
+        "3xl": "3rem",
         "full": "9999px"
       },
     },

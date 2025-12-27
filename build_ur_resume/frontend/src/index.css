@@ -1,7 +1,8 @@
 @import "tailwindcss";
+@variant dark (&:where(.dark, .dark *));
 
 @theme {
-  /* Colors */
+  /* Colors - Light Mode / Original */
   --color-primary: #c0755d;
   --color-primary-hover: #a8634d;
   --color-accent-green: #7f9e8a;
@@ -12,7 +13,7 @@
   --color-border-soft: #e6e1d6;
   --color-white: #ffffff;
 
-  /* Dark Mode Colors */
+  /* Colors - Dark Mode (Refined) */
   --color-dark-charcoal: #1c1917;
   --color-dark-card-bg: #292524;
   --color-dark-input-bg: #141211;
@@ -25,8 +26,15 @@
   --color-dark-text-medium: #a8a29e;
   --color-dark-text-darker: #57534e;
 
+  /* Aliases/Compat */
+  --color-sand: #f9f7f2;
+  --color-background-dark: #1c1917;
+  --color-surface-light: #ffffff;
+  --color-surface-dark: #292524;
+
   /* Fonts */
   --font-heading: "Varela Round", sans-serif;
+  --font-display: "Varela Round", sans-serif;
   --font-body: "Nunito Sans", sans-serif;
 
   /* Border Radius */
@@ -39,7 +47,9 @@
 /* Global Styles */
 body {
   font-family: var(--font-body);
-  @apply bg-soft-cream text-text-dark antialiased transition-colors duration-200;
+  background-color: var(--color-soft-cream);
+  color: var(--color-text-dark);
+  @apply antialiased transition-colors duration-200;
 }
 
 h1,
@@ -55,7 +65,8 @@ label,
 
 /* Dark Mode Global */
 :root.dark body {
-  @apply bg-dark-charcoal text-off-white;
+  background-color: var(--color-dark-charcoal);
+  color: var(--color-off-white);
 }
 
 /* Form Input Focus (Light) */
@@ -101,4 +112,21 @@ label,
 /* Material Symbols */
 .material-symbols-outlined {
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
