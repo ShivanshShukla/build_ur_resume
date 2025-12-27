@@ -1,123 +1,76 @@
-/* Tailwind v4 core imports */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap');
-@import "tailwindcss/preflight";
-@import "tailwindcss/theme";
-@import "tailwindcss/utilities";
+@import "tailwindcss";
 
+@theme {
+  /* Colors */
+  --color-primary: #c0755d;
+  --color-primary-hover: #a8634d;
+  --color-accent-green: #7f9e8a;
+  --color-soft-cream: #f9f7f2;
+  --color-dark-cream: #edeadd;
+  --color-text-dark: #44403c;
+  --color-text-light: #78716c;
+  --color-border-soft: #e6e1d6;
+  --color-white: #ffffff;
 
-/* ---- Your Global Styles ---- */
+  /* Dark Mode Colors */
+  --color-dark-charcoal: #1c1917;
+  --color-dark-card-bg: #292524;
+  --color-dark-input-bg: #141211;
+  --color-dark-border: #44403c;
+  --color-dark-forest-green: #0f2e28;
+  --color-dark-accent: #d4856e;
+  --color-dark-accent-hover: #b56d58;
+  --color-off-white: #fafaf9;
+  --color-light-cream: #e7e5e4;
+  --color-dark-text-medium: #a8a29e;
+  --color-dark-text-darker: #57534e;
 
-:root {
-  --bg: #ffffff;
-  --text: #213547;
-  --muted: #6b7280;
-  --primary: #646cff;
-  --primary-600: #535bf2;
-  --surface: #f9f9f9;
-  --card: #ffffff;
+  /* Fonts */
+  --font-heading: "Varela Round", sans-serif;
+  --font-body: "Nunito Sans", sans-serif;
+
+  /* Border Radius */
+  --radius-lg: 1.25rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+  --radius-3xl: 3rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #121212;
-    --text: #e6eef8;
-    --muted: #9ca3af;
-    --primary: #8b83ff;
-    --primary-600: #a79bff;
-    --surface: #1a1a1a;
-    --card: #151515;
-  }
-}
-
-html,
-body,
-#root {
-  height: 100%;
-}
-
+/* Global Styles */
 body {
-  margin: 0;
-  background-color: var(--bg);
-  color: var(--text);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  line-height: 1.5;
+  font-family: var(--font-body);
+  @apply bg-soft-cream text-text-dark antialiased transition-colors duration-200;
 }
 
-/* Links */
-a {
-  color: var(--primary);
-  font-weight: 500;
-  text-decoration: none;
-}
-
-a:hover {
-  color: var(--primary-600);
-  text-decoration: underline;
-}
-
-/* src/index.css */
-@keyframes marquee {
-  0% {
-    transform: translateX(0%);
-  }
-
-  100% {
-    transform: translateX(-100%);
-  }
-}
-
-.animate-marquee {
-  animation: marquee 25s linear infinite;
-}
-
-/* Custom Theme Classes (Fallback if config fails) */
-.bg-soft-cream {
-  background-color: #f9f7f2;
-}
-
-.bg-primary {
-  background-color: #c0755d;
-}
-
-.bg-primary-hover:hover {
-  background-color: #a8634d;
-}
-
-.text-primary {
-  color: #c0755d;
-}
-
-.text-text-dark {
-  color: #44403c;
-}
-
-.text-text-light {
-  color: #78716c;
-}
-
-.border-border-soft {
-  border-color: #e6e1d6;
-}
-
-.bg-accent-green {
-  background-color: #7f9e8a;
-}
-
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label,
 .font-heading {
-  font-family: 'Varela Round', sans-serif;
+  font-family: var(--font-heading);
 }
 
-.font-body {
-  font-family: 'Nunito Sans', sans-serif;
+/* Dark Mode Global */
+:root.dark body {
+  @apply bg-dark-charcoal text-off-white;
 }
 
-/* Resume AI Specific Fixes */
+/* Form Input Focus (Light) */
 .form-input:focus-within {
-  border-color: #c0755d;
-  box-shadow: 0 0 0 1px #c0755d;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 1px var(--color-primary);
 }
 
-/* Scrollbar matching the HTML design */
+/* Form Input Focus (Dark) */
+:root.dark .form-input:focus-within {
+  border-color: var(--color-dark-accent);
+  box-shadow: 0 0 0 1px var(--color-dark-accent);
+}
+
+/* Scrollbar (Light) */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -135,14 +88,17 @@ a:hover {
   background: #c0b8a8;
 }
 
-.material-symbols-outlined {
-  font-variation-settings:
-    'FILL' 0,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 24;
+/* Scrollbar (Dark) */
+:root.dark ::-webkit-scrollbar-thumb {
+  background: var(--color-dark-border);
+  border-radius: 4px;
 }
 
-html {
-  scroll-behavior: smooth;
+:root.dark ::-webkit-scrollbar-thumb:hover {
+  background: var(--color-dark-text-medium);
+}
+
+/* Material Symbols */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }

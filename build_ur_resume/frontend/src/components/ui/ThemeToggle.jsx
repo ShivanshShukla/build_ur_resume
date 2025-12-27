@@ -13,10 +13,15 @@ export default function ThemeToggle() {
     if (!mounted) return null;
 
     // Cycle: Light -> Dark -> System -> Light
+    // Intelligent Cycle: System -> (Opposite of System) -> ...
     const cycleTheme = () => {
-        if (theme === 'light') setTheme('dark');
-        else if (theme === 'dark') setTheme('system');
-        else setTheme('light');
+        if (theme === 'light') {
+            setTheme('dark');
+        } else if (theme === 'dark') {
+            setTheme('system');
+        } else {
+            setTheme('light');
+        }
     };
 
     return (

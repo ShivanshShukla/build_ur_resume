@@ -4,45 +4,35 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: "class",
+  darkMode: "selector",
   theme: {
     extend: {
       colors: {
-        // Unified Palette
-        "primary": "#c0755d", // Updated Terracotta
-        "primary-light": "#e8b4a7",
-        "primary-hover": "#a8634d",
-        "secondary": "#5a6c4f", // Earthy Green
-        "accent-green": "#7f9e8a",
-        "cream": "#fdfbf7",
-        "soft-cream": "#f9f7f2",
-        "dark-cream": "#edeadd",
-        "sand": "#f4f1ea",
-        "background-light": "#fcfbf7",
-        "background-dark": "#1c1917", // Warm dark grey
-        "surface-light": "#ffffff",
-        "surface-dark": "#292524",
+        // Light Mode Palette (Boutique Aesthetic)
+        "primary": "#EAD2BF", // Soft Terracotta
+        "primary-hover": "#dcc0aa", // Slightly darker for hover
+        "secondary": "#A3B5A1", // Earthy Green
+        "accent-green": "#A3B5A1", // Mapping Secondary to accent-green
+        "soft-cream": "#FDF9F5", // Creamy White
+        "cream": "#FDF9F5",
+        "text-dark": "#4A4A4A", // Charcoal Grey
+        "text-light": "#8C8C8C", // Medium Grey
+        "border-soft": "#C79F7F", // Muted Gold/Bronze (Accent) for key borders
         "white": "#ffffff",
 
-        // Text
-        "text-main": "#3f3a36", // Soft charcoal
-        "text-muted": "#756d66", // Warm grey
-        "text-dark": "#44403c",
-        "text-light": "#78716c",
-        "border-soft": "#e6e1d6",
-
-        // Dark Mode Specifics
-        "dark-charcoal": "#1c1917",
-        "dark-card-bg": "#292524",
-        "dark-input-bg": "#141211",
-        "dark-border": "#44403c",
-        "dark-forest-green": "#0f2e28",
-        "dark-accent": "#d4856e",
-        "dark-accent-hover": "#b56d58",
-        "off-white": "#fafaf9",
-        "light-cream": "#e7e5e4",
-        "dark-text-medium": "#a8a29e",
-        "dark-text-darker": "#57534e",
+        // Dark Mode Palette (Boutique Aesthetic - Dark)
+        "dark-charcoal": "#2C2C2C", // Deep Grey (Background)
+        "dark-card-bg": "#363636", // Slightly lighter than bg
+        "dark-input-bg": "#242424", // Slightly darker than bg
+        "dark-border": "#4F6B4F", // Deep Forest Green or Bronze? Using Secondary Dark for contrast
+        "dark-forest-green": "#4F6B4F", // Deep Forest Green
+        "dark-accent": "#8B4513", // Saddle Brown (Primary Dark) - used for main buttons
+        "dark-accent-hover": "#9e531e",
+        "off-white": "#FDF9F5", // Creamy White (High Contrast Text)
+        "light-cream": "#BEBEBE", // Light Grey (Muted Text)
+        "dark-text-medium": "#BEBEBE",
+        "dark-text-darker": "#8C8C8C",
+        "dark-gold": "#B8860B", // Dark Goldenrod (True Accent)
       },
       fontFamily: {
         "display": ["Nunito", "sans-serif"],
@@ -60,5 +50,7 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require("@tailwindcss/forms"),
+  ],
 }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { postJson } from "../utils/api";
+import { useTheme } from "../context/ThemeContext";
 
 export default function AuthPage({ initialView = "login" }) {
   const [view, setView] = useState(initialView);
@@ -25,6 +26,22 @@ export default function AuthPage({ initialView = "login" }) {
   const switchView = (v) => {
     setView(v);
     setErr(null);
+  };
+
+  // Theme Toggle Logic
+  const { theme, setTheme } = useTheme();
+
+  // Derived state for UI (assuming theme can be 'system', 'dark', 'light')
+  const isDark = theme === "dark" || (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+  const toggleTheme = () => {
+    if (theme === 'light') {
+      setTheme('dark');
+    } else if (theme === 'dark') {
+      setTheme('system');
+    } else {
+      setTheme('light');
+    }
   };
 
   async function handleLogin(e) {
@@ -81,7 +98,18 @@ export default function AuthPage({ initialView = "login" }) {
   );
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8 bg-soft-cream bg-[radial-gradient(#e6e1d6_1px,transparent_1px)] [background-size:24px_24px] dark:bg-dark-charcoal dark:bg-[radial-gradient(#44403c_1px,transparent_1px)] font-body text-text-dark dark:text-off-white">
+    <div className="min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8 bg-soft-cream bg-[radial-gradient(#e6e1d6_1px,transparent_1px)] [background-size:24px_24px] dark:bg-dark-charcoal dark:bg-[radial-gradient(#44403c_1px,transparent_1px)] font-body text-text-dark dark:text-off-white relative">
+      {/* Theme Toggle Button */}
+      <button
+        onClick={toggleTheme}
+        className="absolute top-4 right-4 z-50 p-2.5 rounded-full bg-white/50 dark:bg-black/20 backdrop-blur-md border border-border-soft/50 dark:border-dark-border text-text-dark dark:text-off-white hover:bg-white/80 dark:hover:bg-black/40 transition-all shadow-sm group"
+        aria-label="Toggle Dark Mode"
+      >
+        <span className="material-symbols-outlined text-[24px] group-hover:rotate-12 transition-transform">
+          {theme === 'light' ? 'light_mode' : theme === 'dark' ? 'dark_mode' : 'brightness_auto'}
+        </span>
+      </button>
+
       <div className="w-full max-w-5xl bg-white rounded-3xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] border border-border-soft overflow-hidden flex flex-col lg:flex-row relative z-10 dark:bg-dark-card-bg dark:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] dark:border-dark-border">
 
         {/* LEFT SIDE: Form Area */}
@@ -157,7 +185,7 @@ export default function AuthPage({ initialView = "login" }) {
                 <div className="relative group">
                   <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-light text-[20px] group-focus-within:text-primary transition-colors dark:text-dark-text-medium dark:group-focus-within:text-dark-accent">mail</span>
                   <input
-                    className="w-full pl-11 pr-4 h-12 bg-white border border-border-soft rounded-2xl focus:border-primary focus:ring-1 focus:ring-primary text-text-dark placeholder-text-light/50 transition-all font-body outline-none dark:bg-dark-input-bg dark:border-dark-border dark:text-off-white dark:placeholder-dark-text-medium/40 dark:focus:border-dark-accent dark:focus:ring-dark-accent"
+                    className="form-input w-full pl-11 pr-4 h-12 bg-white border border-border-soft rounded-2xl focus:border-primary focus:ring-1 focus:ring-primary text-text-dark placeholder-text-light/50 transition-all font-body outline-none dark:bg-dark-input-bg dark:border-dark-border dark:text-off-white dark:placeholder-dark-text-medium/40 dark:focus:border-dark-accent dark:focus:ring-dark-accent"
                     placeholder="hello@creative.com"
                     type="text"
                     required
@@ -171,7 +199,7 @@ export default function AuthPage({ initialView = "login" }) {
                 <div className="relative group">
                   <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-light text-[20px] group-focus-within:text-primary transition-colors dark:text-dark-text-medium dark:group-focus-within:text-dark-accent">lock</span>
                   <input
-                    className="w-full pl-11 pr-11 h-12 bg-white border border-border-soft rounded-2xl focus:border-primary focus:ring-1 focus:ring-primary text-text-dark placeholder-text-light/50 transition-all font-body outline-none dark:bg-dark-input-bg dark:border-dark-border dark:text-off-white dark:placeholder-dark-text-medium/40 dark:focus:border-dark-accent dark:focus:ring-dark-accent"
+                    className="form-input w-full pl-11 pr-11 h-12 bg-white border border-border-soft rounded-2xl focus:border-primary focus:ring-1 focus:ring-primary text-text-dark placeholder-text-light/50 transition-all font-body outline-none dark:bg-dark-input-bg dark:border-dark-border dark:text-off-white dark:placeholder-dark-text-medium/40 dark:focus:border-dark-accent dark:focus:ring-dark-accent"
                     placeholder="••••••••"
                     type="password"
                     required
@@ -205,7 +233,7 @@ export default function AuthPage({ initialView = "login" }) {
                 <div>
                   <label className="block text-sm font-bold text-text-dark mb-1.5 ml-1 dark:text-off-white">First Name</label>
                   <input
-                    className="w-full px-4 h-12 bg-white border border-border-soft rounded-2xl focus:border-primary focus:ring-1 focus:ring-primary text-text-dark placeholder-text-light/50 transition-all font-body outline-none dark:bg-dark-input-bg dark:border-dark-border dark:text-off-white dark:placeholder-dark-text-medium/40 dark:focus:border-dark-accent dark:focus:ring-dark-accent"
+                    className="form-input w-full px-4 h-12 bg-white border border-border-soft rounded-2xl focus:border-primary focus:ring-1 focus:ring-primary text-text-dark placeholder-text-light/50 transition-all font-body outline-none dark:bg-dark-input-bg dark:border-dark-border dark:text-off-white dark:placeholder-dark-text-medium/40 dark:focus:border-dark-accent dark:focus:ring-dark-accent"
                     placeholder="Jane"
                     type="text"
                     required
@@ -216,7 +244,7 @@ export default function AuthPage({ initialView = "login" }) {
                 <div>
                   <label className="block text-sm font-bold text-text-dark mb-1.5 ml-1 dark:text-off-white">Last Name</label>
                   <input
-                    className="w-full px-4 h-12 bg-white border border-border-soft rounded-2xl focus:border-primary focus:ring-1 focus:ring-primary text-text-dark placeholder-text-light/50 transition-all font-body outline-none dark:bg-dark-input-bg dark:border-dark-border dark:text-off-white dark:placeholder-dark-text-medium/40 dark:focus:border-dark-accent dark:focus:ring-dark-accent"
+                    className="form-input w-full px-4 h-12 bg-white border border-border-soft rounded-2xl focus:border-primary focus:ring-1 focus:ring-primary text-text-dark placeholder-text-light/50 transition-all font-body outline-none dark:bg-dark-input-bg dark:border-dark-border dark:text-off-white dark:placeholder-dark-text-medium/40 dark:focus:border-dark-accent dark:focus:ring-dark-accent"
                     placeholder="Doe"
                     type="text"
                     value={lastName}
@@ -230,7 +258,7 @@ export default function AuthPage({ initialView = "login" }) {
                 <div className="relative group">
                   <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-light text-[20px] group-focus-within:text-primary transition-colors dark:text-dark-text-medium dark:group-focus-within:text-dark-accent">mail</span>
                   <input
-                    className="w-full pl-11 pr-4 h-12 bg-white border border-border-soft rounded-2xl focus:border-primary focus:ring-1 focus:ring-primary text-text-dark placeholder-text-light/50 transition-all font-body outline-none dark:bg-dark-input-bg dark:border-dark-border dark:text-off-white dark:placeholder-dark-text-medium/40 dark:focus:border-dark-accent dark:focus:ring-dark-accent"
+                    className="form-input w-full pl-11 pr-4 h-12 bg-white border border-border-soft rounded-2xl focus:border-primary focus:ring-1 focus:ring-primary text-text-dark placeholder-text-light/50 transition-all font-body outline-none dark:bg-dark-input-bg dark:border-dark-border dark:text-off-white dark:placeholder-dark-text-medium/40 dark:focus:border-dark-accent dark:focus:ring-dark-accent"
                     placeholder="hello@creative.com"
                     type="email"
                     required
@@ -245,7 +273,7 @@ export default function AuthPage({ initialView = "login" }) {
                 <div className="relative group">
                   <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-light text-[20px] group-focus-within:text-primary transition-colors dark:text-dark-text-medium dark:group-focus-within:text-dark-accent">call</span>
                   <input
-                    className="w-full pl-11 pr-4 h-12 bg-white border border-border-soft rounded-2xl focus:border-primary focus:ring-1 focus:ring-primary text-text-dark placeholder-text-light/50 transition-all font-body outline-none dark:bg-dark-input-bg dark:border-dark-border dark:text-off-white dark:placeholder-dark-text-medium/40 dark:focus:border-dark-accent dark:focus:ring-dark-accent"
+                    className="form-input w-full pl-11 pr-4 h-12 bg-white border border-border-soft rounded-2xl focus:border-primary focus:ring-1 focus:ring-primary text-text-dark placeholder-text-light/50 transition-all font-body outline-none dark:bg-dark-input-bg dark:border-dark-border dark:text-off-white dark:placeholder-dark-text-medium/40 dark:focus:border-dark-accent dark:focus:ring-dark-accent"
                     placeholder="+1 234 567 8900"
                     type="tel"
                     required
@@ -260,7 +288,7 @@ export default function AuthPage({ initialView = "login" }) {
                 <div className="relative group">
                   <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-light text-[20px] group-focus-within:text-primary transition-colors dark:text-dark-text-medium dark:group-focus-within:text-dark-accent">lock</span>
                   <input
-                    className="w-full pl-11 pr-4 h-12 bg-white border border-border-soft rounded-2xl focus:border-primary focus:ring-1 focus:ring-primary text-text-dark placeholder-text-light/50 transition-all font-body outline-none dark:bg-dark-input-bg dark:border-dark-border dark:text-off-white dark:placeholder-dark-text-medium/40 dark:focus:border-dark-accent dark:focus:ring-dark-accent"
+                    className="form-input w-full pl-11 pr-4 h-12 bg-white border border-border-soft rounded-2xl focus:border-primary focus:ring-1 focus:ring-primary text-text-dark placeholder-text-light/50 transition-all font-body outline-none dark:bg-dark-input-bg dark:border-dark-border dark:text-off-white dark:placeholder-dark-text-medium/40 dark:focus:border-dark-accent dark:focus:ring-dark-accent"
                     placeholder="Create a password"
                     type="password"
                     required
