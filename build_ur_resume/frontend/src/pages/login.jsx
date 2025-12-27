@@ -82,14 +82,14 @@ export default function AuthPage({ initialView = "login" }) {
     <div className="grid grid-cols-2 gap-4 mb-8">
       <button
         onClick={() => { window.location.href = `${API_URL}/api/auth/oauth/google/login`; }}
-        className="flex items-center justify-center gap-2 h-12 rounded-full border border-border-soft hover:bg-soft-cream transition-colors text-text-dark font-bold text-sm group dark:border-dark-border dark:hover:bg-dark-input-bg dark:text-off-white dark:bg-[#2e2b29]"
+        className="flex items-center justify-center gap-2 h-12 rounded-full border border-border-default hover:bg-subtle-light transition-colors text-text-main font-bold text-sm group dark:border-border-default-dark dark:hover:bg-surface-dark dark:text-surface-light dark:bg-background-dark"
       >
         <svg aria-hidden="true" className="h-5 w-5 group-hover:scale-110 transition-transform" viewBox="0 0 24 24"><path d="M12.0003 20.45c4.6667 0 7.895-3.2383 8.1634-8.0867h-8.1634v3.3934h4.725c-.2184 1.3417-1.3717 3.5117-4.725 3.5117-2.85 0-5.1767-2.3167-5.1767-5.1767s2.3267-5.1767 5.1767-5.1767c1.3283 0 2.4933.4867 3.2883 1.25l2.52-2.52c-1.66-1.5517-3.805-2.48-5.8083-2.48-4.8117 0-8.7267 3.915-8.7267 8.7267s3.915 8.7267 8.7267 8.7267z" fill="currentColor"></path></svg>
         Google
       </button>
       <button
         onClick={() => { window.location.href = `${API_URL}/api/auth/oauth/linkedin/login`; }}
-        className="flex items-center justify-center gap-2 h-12 rounded-full border border-border-soft hover:bg-soft-cream transition-colors text-text-dark font-bold text-sm group dark:border-dark-border dark:hover:bg-dark-input-bg dark:text-off-white dark:bg-[#2e2b29]"
+        className="flex items-center justify-center gap-2 h-12 rounded-full border border-border-default hover:bg-subtle-light transition-colors text-text-main font-bold text-sm group dark:border-border-default-dark dark:hover:bg-surface-dark dark:text-surface-light dark:bg-background-dark"
       >
         <svg aria-hidden="true" className="h-5 w-5 text-[#0A66C2] group-hover:scale-110 transition-transform dark:text-[#4a9cd6]" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 21.227.792 22 1.771 22h20.451C23.2 22 24 21.227 24 20.271V1.729C24 .774 23.2 0 22.225 0z"></path></svg>
         LinkedIn
@@ -99,7 +99,8 @@ export default function AuthPage({ initialView = "login" }) {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8 bg-soft-cream bg-[radial-gradient(#e6e1d6_1px,transparent_1px)] [background-size:24px_24px] dark:bg-dark-charcoal dark:bg-[radial-gradient(#44403c_1px,transparent_1px)] font-body text-text-dark dark:text-off-white relative">
-      {/* Theme Toggle Button */}
+
+      {/* Theme Toggle (Preserved for functionality) */}
       <button
         onClick={toggleTheme}
         className="absolute top-4 right-4 z-50 p-2.5 rounded-full bg-white/50 dark:bg-black/20 backdrop-blur-md border border-border-soft/50 dark:border-dark-border text-text-dark dark:text-off-white hover:bg-white/80 dark:hover:bg-black/40 transition-all shadow-sm group"
@@ -172,7 +173,7 @@ export default function AuthPage({ initialView = "login" }) {
           </div>
 
           {err && (
-            <div className="mb-4 p-3 bg-red-50 text-red-600 rounded-lg text-sm border border-red-100">
+            <div className="mb-4 p-3 bg-red-50 text-red-600 rounded-lg text-sm border border-red-100 dark:bg-red-900/10 dark:text-red-400 dark:border-red-900/20">
               {err}
             </div>
           )}
