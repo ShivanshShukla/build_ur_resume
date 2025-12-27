@@ -4,50 +4,68 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: "class",
+  darkMode: "selector",
   theme: {
     extend: {
       colors: {
-        // Unified Palette
-        "primary": "#c05a42", // Updated Terracotta (New)
+        // Brand
+        "primary": "#c05a42",
         "primary-light": "#e8b4a7",
-        "primary-hover": "#a44d38",
-        "secondary": "#5a6c4f", // Earthy Green
-        "accent-green": "#7f9e8a",
-        "cream": "#fdfbf7",
-        "soft-cream": "#f9f7f2",
-        "dark-cream": "#edeadd",
-        "sand": "#f4f1ea",
-        "background-light": "#fcfbf7",
-        "background-dark": "#1c1917", // Warm dark grey
-        "surface-light": "#ffffff",
-        "surface-dark": "#292524",
-        "white": "#ffffff",
+        "secondary": "#5a6c4f",
 
-        // Text
-        "text-main": "#3f3a36", // Soft charcoal
-        "text-muted": "#756d66", // Warm grey
-        "text-dark": "#44403c",
-        "text-light": "#78716c",
-        "border-soft": "#e6e1d6",
+        // Light Mode Structure
+        "sand": "#f4f1ea", // light.background.page
+        "surface-light": "#ffffff", // light.background.surface
+        "subtle-light": "#f5f5f4", // light.background.subtle
+        "feature-card-light": "#fafaf9", // light.background.featureCard
 
-        // Dark Mode Specifics
-        "dark-charcoal": "#1c1917",
-        "dark-card-bg": "#292524",
-        "dark-input-bg": "#141211",
-        "dark-border": "#44403c",
-        "dark-forest-green": "#0f2e28",
-        "dark-accent": "#d4856e",
-        "dark-accent-hover": "#b56d58",
-        "off-white": "#fafaf9",
-        "light-cream": "#e7e5e4",
-        "dark-text-medium": "#a8a29e",
-        "dark-text-darker": "#57534e",
+        // Light Mode Text
+        "text-main": "#3f3a36",
+        "text-muted": "#756d66",
+        "text-inverse": "#ffffff",
+
+        // Light Mode Borders
+        "border-default": "#e7e5e4",
+        "border-strong": "#d6d3d1",
+
+        // Dark Mode Structure
+        "background-dark": "#1c1917", // dark.background.page (mapped to background-dark for compatibility)
+        "surface-dark": "#292524", // dark.background.surface
+        "subtle-dark": "#292524",
+        "feature-card-dark": "rgba(28, 25, 23, 0.5)",
+
+        // Dark Mode Text (Using 'dark-' prefix or semantic mapping?)
+        // In home.jsx I used: dark:text-stone-200, dark:text-white. 
+        // I should stick to the specific palette provided.
+        // But home.jsx is hardcoded with utility classes like text-stone-300. 
+        // I might need to update home.jsx later or map these here if I want to enforce the palette.
+        // For now, I will define the palette.
+
+        "text-main-dark": "#d6d3d1",
+        "text-muted-dark": "#a8a29e",
+        "text-inverse-dark": "#1c1917",
+
+        "border-default-dark": "#292524",
+        "border-strong-dark": "#44403c",
+
+        // Action Buttons
+        "btn-primary-bg": "#c05a42",
+        "btn-primary-text": "#ffffff",
+        "btn-secondary-bg": "#f5f5f4",
+        "btn-secondary-text": "#3f3a36",
+
+        // Status
+        "status-star": "#fbbf24",
+        "status-trusted-text": "#5a6c4f",
+        "status-trusted-bg": "rgba(90, 108, 79, 0.1)",
+
+        // Misc defaults/aliases to prevent breakage
+        "cream": "#fdfbf7", // Keep just in case
       },
       fontFamily: {
         "display": ["Nunito", "sans-serif"],
         "heading": ["Varela Round", "sans-serif"],
-        "body": ["DM Sans", "sans-serif"], // Updated to DM Sans
+        "body": ["DM Sans", "sans-serif"], // Requested update
         "sans": ["Nunito Sans", "sans-serif"]
       },
       borderRadius: {
@@ -60,5 +78,7 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require("@tailwindcss/forms"),
+  ],
 }
