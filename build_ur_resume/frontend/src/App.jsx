@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/layout";
 import ProtectedRoute from "./components/protected_route";
@@ -22,6 +22,19 @@ const Loading = () => (
 );
 
 export default function App() {
+  // Global Theme Initialization
+  useEffect(() => {
+    // Check local storage or system preference on mount
+    const isDark = localStorage.getItem("theme") === "dark" ||
+      (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
+
   return (
     <div className="app-container">
       <Suspense fallback={<Loading />}>
