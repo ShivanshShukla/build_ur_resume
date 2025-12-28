@@ -2,6 +2,7 @@ import React, { Suspense, lazy, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/layout";
 import ProtectedRoute from "./components/protected_route";
+import { ToastProvider } from "./context/ToastContext";
 
 // Lazy Load Pages
 const Home = lazy(() => import("./pages/home"));
@@ -37,27 +38,29 @@ export default function App() {
 
   return (
     <div className="app-container">
-      <Suspense fallback={<Loading />}>
-        <Routes>
-          <Route path="/" element={<Home />} />
+      <ToastProvider>
+        <Suspense fallback={<Loading />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
 
-          <Route path="/upload" element={<Layout><Upload /></Layout>} />
-          <Route path="/job" element={<Layout><Job /></Layout>} />
-          <Route path="/resume/:id" element={<Layout><ResumeView /></Layout>} />
+            <Route path="/upload" element={<Layout><Upload /></Layout>} />
+            <Route path="/job" element={<Layout><Job /></Layout>} />
+            <Route path="/resume/:id" element={<Layout><ResumeView /></Layout>} />
 
-          {/* Auth - No Layout */}
-          <Route path="/login" element={<Login initialView="login" />} />
-          <Route path="/register" element={<Login initialView="register" />} />
+            {/* Auth - No Layout */}
+            <Route path="/login" element={<Login initialView="login" />} />
+            <Route path="/register" element={<Login initialView="register" />} />
 
-          {/* Protected Routes */}
-          <Route path="/account" element={<Layout><ProtectedRoute><div className="p-6">Account area (protected)</div></ProtectedRoute></Layout>} />
-          <Route path="/oauth-callback" element={<OAuthCallback />} />
+            {/* Protected Routes */}
+            <Route path="/account" element={<Layout><ProtectedRoute><div className="p-6">Account area (protected)</div></ProtectedRoute></Layout>} />
+            <Route path="/oauth-callback" element={<OAuthCallback />} />
 
-          {/* Main App Routes */}
-          <Route path="/resume-builder" element={<Layout><Builder /></Layout>} />
-          <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
-        </Routes>
-      </Suspense>
+            {/* Main App Routes */}
+            <Route path="/resume-builder" element={<Layout><Builder /></Layout>} />
+            <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
+          </Routes>
+        </Suspense>
+      </ToastProvider>
     </div>
   );
 }

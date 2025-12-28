@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import ThemeToggle from "../components/ui/ThemeToggle";
 
 export default function Home() {
@@ -39,7 +40,12 @@ export default function Home() {
       {/* MAIN */}
       <main className="w-full max-w-[1440px] mx-auto px-4 md:px-6 py-6 flex flex-col gap-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          <div className="lg:col-span-7 bg-surface-light dark:bg-surface-dark rounded-3xl p-8 md:p-12 border border-border-default dark:border-border-default-dark shadow-sm flex flex-col justify-center items-start relative overflow-hidden">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-7 bg-surface-light dark:bg-surface-dark rounded-3xl p-8 md:p-12 border border-border-default dark:border-border-default-dark shadow-sm flex flex-col justify-center items-start relative overflow-hidden"
+          >
             <div className="relative z-10">
               <div className="inline-flex items-center gap-2 mb-6 rounded-full bg-secondary/10 px-4 py-2 text-xs font-bold text-secondary dark:text-secondary/80 uppercase tracking-wider font-display">
                 <span className="material-symbols-outlined text-base">stars</span>
@@ -70,8 +76,13 @@ export default function Home() {
               </div>
             </div>
             <div className="absolute right-0 bottom-0 opacity-5 w-64 h-64 bg-primary rounded-full blur-3xl transform translate-x-1/2 translate-y-1/2 pointer-events-none"></div>
-          </div>
-          <div className="lg:col-span-5 bg-subtle-light dark:bg-stone-900 rounded-3xl overflow-hidden border border-border-default dark:border-border-default-dark shadow-sm relative group min-h-[400px]">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="lg:col-span-5 bg-subtle-light dark:bg-stone-900 rounded-3xl overflow-hidden border border-border-default dark:border-border-default-dark shadow-sm relative group min-h-[400px]"
+          >
             <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 hover:scale-105" style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuAd-dNVjxwfKaP3fyy5xLO6A4IKmGReQxtu7iykDfYjfmh1MIYbNJHi4MvG9-gs4r-z_n4ZRyrWGvJEjfjP3l_3fhot8pVOgKc-GAtrfiFOBIC2A4wEbsFusP28Cuy2WdUW0UfWT4DaHA_9jcjYvRYXJwxx-3tIy8ZkkFqyEvbmj1yAuotFX-onW8SwFWuY3fgD6RRSugnHilonEwlVOvVlfZ3kuNQw8qYhItlqvy7ZgH_lCdfQkthc-PyJ572v0YPz6A6nfOl3644")' }}></div>
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end justify-center p-8">
               <div className="bg-white/95 backdrop-blur dark:bg-surface-dark/95 rounded-xl p-4 shadow-xl flex items-center gap-4 border border-border-default dark:border-stone-700 w-full max-w-xs animate-bounce">
@@ -84,7 +95,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         <div className="bg-surface-light dark:bg-surface-dark rounded-3xl p-6 md:p-8 border border-border-default dark:border-border-default-dark shadow-sm">

@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { postJson } from "../utils/api";
 import { useTheme } from "../context/ThemeContext";
+import { useToast } from "../context/ToastContext";
+import { motion } from "framer-motion";
+import ThemeToggle from "../components/ui/ThemeToggle";
 
 export default function AuthPage({ initialView = "login" }) {
   const [view, setView] = useState(initialView);
@@ -11,6 +14,8 @@ export default function AuthPage({ initialView = "login" }) {
   // Login State
   const [identifier, setIdentifier] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+
+  const toast = useToast();
 
   // Register State
   const [email, setEmail] = useState("");
@@ -34,15 +39,7 @@ export default function AuthPage({ initialView = "login" }) {
   // Derived state for UI (assuming theme can be 'system', 'dark', 'light')
   const isDark = theme === "dark" || (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
 
-  const toggleTheme = () => {
-    if (theme === 'light') {
-      setTheme('dark');
-    } else if (theme === 'dark') {
-      setTheme('system');
-    } else {
-      setTheme('light');
-    }
-  };
+
 
   async function handleLogin(e) {
     e.preventDefault();
@@ -52,9 +49,11 @@ export default function AuthPage({ initialView = "login" }) {
       const { ok, data } = await postJson("/api/auth/login", { email: identifier, password: loginPassword });
       if (!ok) throw new Error(data?.detail || "Login failed");
       localStorage.setItem("accessToken", data.access_token);
+      toast.success("Welcome back!");
       navigate("/dashboard");
     } catch (error) {
       setErr(error.message);
+      toast.error(error.message);
     } finally {
       setLoading(false);
     }
@@ -70,9 +69,10 @@ export default function AuthPage({ initialView = "login" }) {
       if (!ok) throw new Error(data?.detail || "Registration failed");
       setView("login");
       setIdentifier(email);
-      alert("Registration successful! Please log in.");
+      toast.success("Registration successful! Please log in.");
     } catch (error) {
       setErr(error.message);
+      toast.error(error.message);
     } finally {
       setLoading(false);
     }
@@ -101,17 +101,16 @@ export default function AuthPage({ initialView = "login" }) {
     <div className="min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8 bg-soft-cream bg-[radial-gradient(#e6e1d6_1px,transparent_1px)] [background-size:24px_24px] dark:bg-dark-charcoal dark:bg-[radial-gradient(#44403c_1px,transparent_1px)] font-body text-text-dark dark:text-off-white relative">
 
       {/* Theme Toggle (Preserved for functionality) */}
-      <button
-        onClick={toggleTheme}
-        className="absolute top-4 right-4 z-50 p-2.5 rounded-full bg-white/50 dark:bg-black/20 backdrop-blur-md border border-border-soft/50 dark:border-dark-border text-text-dark dark:text-off-white hover:bg-white/80 dark:hover:bg-black/40 transition-all shadow-sm group"
-        aria-label="Toggle Dark Mode"
-      >
-        <span className="material-symbols-outlined text-[24px] group-hover:rotate-12 transition-transform">
-          {theme === 'light' ? 'light_mode' : theme === 'dark' ? 'dark_mode' : 'brightness_auto'}
-        </span>
-      </button>
+      <div className="absolute top-4 right-4 z-50">
+        <ThemeToggle />
+      </div>
 
-      <div className="w-full max-w-5xl bg-white rounded-3xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] border border-border-soft overflow-hidden flex flex-col lg:flex-row relative z-10 dark:bg-dark-card-bg dark:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] dark:border-dark-border">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+        className="w-full max-w-5xl bg-white rounded-3xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] border border-border-soft overflow-hidden flex flex-col lg:flex-row relative z-10 dark:bg-dark-card-bg dark:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] dark:border-dark-border"
+      >
 
         {/* LEFT SIDE: Form Area */}
         <div className="w-full lg:w-1/2 p-8 sm:p-12 lg:p-14 flex flex-col justify-center relative">
@@ -337,7 +336,7 @@ export default function AuthPage({ initialView = "login" }) {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
